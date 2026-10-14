@@ -17,5 +17,5 @@ object NetworkModule {
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-    val activationApi = retrofit.create<NetworkModule>()
+    val activationApi = retrofit.create<ActivationApi>()
 }
