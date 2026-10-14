@@ -5,7 +5,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.CancellationException
 import sk.figlar.scratchcard.data.activation.ActivationApi
-import sk.figlar.scratchcard.data.activation.ActivationRepository
+import sk.figlar.scratchcard.data.activation.ActivationRepositoryImpl
 import sk.figlar.scratchcard.data.activation.ActivationResponse
 import sk.figlar.scratchcard.data.activation.ActivationResult
 import java.io.IOException
@@ -16,11 +16,11 @@ class ActivationRepositoryTest : StringSpec({
     val code = UUID.fromString("d6743448-22e5-4055-b169-ec60955b5218")
 
     lateinit var api: FakeActivationApi
-    lateinit var repository: ActivationRepository
+    lateinit var repository: ActivationRepositoryImpl
 
     beforeTest {
         api = FakeActivationApi()
-        repository = ActivationRepository(api)
+        repository = ActivationRepositoryImpl(api)
     }
 
     "returns Success if android version is greater than threshold" {
