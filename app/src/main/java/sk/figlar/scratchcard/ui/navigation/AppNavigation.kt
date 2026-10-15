@@ -35,6 +35,7 @@ fun AppNavigation(
                     onActivationClick = {
                         backStack.add(Destination.Activation)
                     },
+                    onResetCardClick = viewModel::resetCard,
                 )
             }
             entry<Destination.Scratch> {

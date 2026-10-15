@@ -7,8 +7,8 @@
     <string name="activate_card">Activate card</string>
     <string name="code">Code</string>
     <string name="scratching_card">Scratching card...</string>
-    <string name="card_scratched">Card scratched!</string>
-    <string name="ready_to_activate">Ready to activate</string>
+    <string name="card_scratched_successfully">Card scratched successfully!</string>
+    <string name="ready_to_activate">Ready to activate!</string>
     <string name="activating_card">Activating card...</string>
     <string name="card_activated_successfully">Card activated successfully!</string>
     <string name="activation_rejected">Activation rejected</string>
@@ -16,4 +16,8 @@
     <string name="ok">OK</string>
     <string name="activation_failed">Activation failed</string>
     <string name="activation_failed_body">An error occurred while activating the card. Please try again later.</string>
+    <string name="uuid_placeholder">xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</string>
+    <string name="ready_to_scratch">Ready to scratch!</string>
+    <string name="home">Home</string>
+    <string name="reset_card">Reset card</string>
 </resources>
