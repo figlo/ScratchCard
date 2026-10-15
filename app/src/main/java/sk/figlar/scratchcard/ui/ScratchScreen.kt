@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.delay
 import sk.figlar.scratchcard.R
-import sk.figlar.scratchcard.SCRATCH_DELAY
+import sk.figlar.scratchcard.SIMULATED_OPERATION_DELAY
 import sk.figlar.scratchcard.domain.ScratchCardStatus
 import sk.figlar.scratchcard.ui.components.ScratchCardView
 import java.util.UUID
@@ -38,7 +38,7 @@ fun ScratchScreen(
 
     LaunchedEffect(scratching) {
         if (scratching) {
-            delay(SCRATCH_DELAY.milliseconds)
+            delay(SIMULATED_OPERATION_DELAY.milliseconds)
             viewModel.completeScratch(UUID.randomUUID())
             scratching = false
         }

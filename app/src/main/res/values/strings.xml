@@ -5,11 +5,10 @@
     <string name="scratched">Scratched</string>
     <string name="activated">Activated</string>
     <string name="activate_card">Activate card</string>
-    <string name="code">Code</string>
-    <string name="scratching_card">Scratching card...</string>
+    <string name="scratching_card">Scratching card…</string>
     <string name="card_scratched_successfully">Card scratched successfully!</string>
     <string name="ready_to_activate">Ready to activate!</string>
-    <string name="activating_card">Activating card...</string>
+    <string name="activating_card">Activating card…</string>
     <string name="card_activated_successfully">Card activated successfully!</string>
     <string name="activation_rejected">Activation rejected</string>
     <string name="activation_rejected_body">This card cannot be activated because its version is too low.</string>

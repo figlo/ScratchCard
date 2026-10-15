@@ -44,10 +44,10 @@ fun ScratchCardView(
         else                        -> Color(0xFFE0E0E0)
     }
 
-    val codeColor = when {
-        card.status == ScratchCardStatus.ACTIVATED -> Color(0xFF1B5E20)
-        card.status == ScratchCardStatus.SCRATCHED -> Color(0xFFE65100)
-        else                                       -> Color(0xFF616161)
+    val codeColor = when (card.status) {
+        ScratchCardStatus.ACTIVATED -> Color(0xFF1B5E20)
+        ScratchCardStatus.SCRATCHED -> Color(0xFFE65100)
+        else                        -> Color(0xFF616161)
     }
 
     Card(
