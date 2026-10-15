@@ -25,6 +25,7 @@ import kotlinx.coroutines.delay
 import sk.figlar.scratchcard.R
 import sk.figlar.scratchcard.SCRATCH_DELAY
 import sk.figlar.scratchcard.domain.ScratchCardStatus
+import sk.figlar.scratchcard.ui.components.ScratchCardView
 import java.util.UUID
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -50,6 +51,17 @@ fun ScratchScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
+        Text(
+        text = stringResource(R.string.scratch_card),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+
+        Spacer(Modifier.height(24.dp))
+
+        ScratchCardView(card = uiState.card)
+
+        Spacer(Modifier.height(16.dp))
+
         when {
             scratching -> {
                 CircularProgressIndicator()
@@ -58,26 +70,26 @@ fun ScratchScreen(
 
                 Text(
                     text = stringResource(R.string.scratching_card),
-                    style = MaterialTheme.typography.titleMedium,
                 )
             }
 
             uiState.card.status == ScratchCardStatus.UNSCRATCHED -> {
-                Button(onClick = { scratching = true }) {
+                Text(stringResource(R.string.ready_to_scratch))
+
+                Spacer(Modifier.height(16.dp))
+
+                Button(
+                    onClick = { scratching = true }
+                ) {
                     Text(stringResource(R.string.scratch_card))
                 }
             }
 
             else -> {
                 Text(
-                    text = stringResource(R.string.card_scratched),
-                    style = MaterialTheme.typography.titleLarge,
+                    text = stringResource(R.string.card_scratched_successfully),
+                    style = MaterialTheme.typography.titleMedium,
                 )
-
-                uiState.card.code?.let { code ->
-                    Spacer(Modifier.height(8.dp))
-                    Text(text = stringResource(R.string.code) + ": " + code.toString().take(8))
-                }
             }
         }
     }

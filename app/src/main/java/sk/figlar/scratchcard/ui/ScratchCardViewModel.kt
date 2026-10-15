@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import sk.figlar.scratchcard.data.activation.ActivationRepository
 import sk.figlar.scratchcard.data.activation.ActivationResult
+import sk.figlar.scratchcard.domain.ScratchCard
 import sk.figlar.scratchcard.domain.ScratchCardEvent
 import sk.figlar.scratchcard.domain.ScratchCardReducer
 import sk.figlar.scratchcard.domain.ScratchCardStatus
@@ -44,7 +45,6 @@ class ScratchCardViewModel(
         }
 
         viewModelScope.launch {
-            println("asdf code: $code")
             when (activationRepository.activate(code)) {
                 ActivationResult.Success -> {
                     _uiState.update {
@@ -78,6 +78,15 @@ class ScratchCardViewModel(
     fun resetActivationState() {
         _uiState.update { state ->
             state.copy(activationUiState = ActivationUiState.Idle)
+        }
+    }
+
+    fun resetCard() {
+        _uiState.update {
+            it.copy(
+                card = ScratchCard(),
+                activationUiState = ActivationUiState.Idle,
+            )
         }
     }
 }

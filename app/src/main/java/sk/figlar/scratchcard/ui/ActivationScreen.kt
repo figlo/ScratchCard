@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import sk.figlar.scratchcard.R
 import sk.figlar.scratchcard.domain.ScratchCardStatus
+import sk.figlar.scratchcard.ui.components.ScratchCardView
 
 @Composable
 fun ActivationScreen(
@@ -43,16 +44,11 @@ fun ActivationScreen(
             style = MaterialTheme.typography.headlineMedium,
         )
 
-        Spacer(Modifier.height(16.dp))
-
-        card.code?.let { code ->
-            Text(
-                text = stringResource(R.string.code) + ": " + code.toString().take(8),
-                style = MaterialTheme.typography.bodyMedium,
-            )
-        }
-
         Spacer(Modifier.height(24.dp))
+
+        ScratchCardView(card = card)
+
+        Spacer(Modifier.height(16.dp))
 
         when (activationState) {
             ActivationUiState.Idle -> {
@@ -76,14 +72,16 @@ fun ActivationScreen(
             ActivationUiState.Error -> Unit
         }
 
-        Spacer(Modifier.height(24.dp))
-
-        Button(
-            onClick = viewModel::activateCard,
-            enabled = activationState == ActivationUiState.Idle &&
-                    card.status == ScratchCardStatus.SCRATCHED,
+        if (activationState == ActivationUiState.Idle &&
+            card.status == ScratchCardStatus.SCRATCHED
         ) {
-            Text(stringResource(R.string.activate_card))
+            Spacer(Modifier.height(16.dp))
+
+            Button(
+                onClick = viewModel::activateCard,
+            ) {
+                Text(stringResource(R.string.activate_card))
+            }
         }
     }
 
@@ -93,9 +91,7 @@ fun ActivationScreen(
             AlertDialog(
                 onDismissRequest = viewModel::resetActivationState,
                 title = { Text(stringResource(R.string.activation_rejected)) },
-                text = {
-                    Text(stringResource(R.string.activation_rejected_body))
-                },
+                text = { Text(stringResource(R.string.activation_rejected_body)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
@@ -113,9 +109,7 @@ fun ActivationScreen(
             AlertDialog(
                 onDismissRequest = viewModel::resetActivationState,
                 title = { Text(stringResource(R.string.activation_failed)) },
-                text = {
-                    Text(stringResource(R.string.activation_failed_body))
-                },
+                text = { Text(stringResource(R.string.activation_failed_body)) },
                 confirmButton = {
                     TextButton(onClick = viewModel::resetActivationState) {
                         Text(stringResource(R.string.ok))

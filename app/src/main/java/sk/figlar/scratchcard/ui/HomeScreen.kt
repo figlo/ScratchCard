@@ -18,12 +18,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import sk.figlar.scratchcard.R
 import sk.figlar.scratchcard.domain.ScratchCardStatus
+import sk.figlar.scratchcard.ui.components.ScratchCardView
 
 @Composable
 fun HomeScreen(
     viewModel: ScratchCardViewModel,
     onScratchClick: () -> Unit,
     onActivationClick: () -> Unit,
+    onResetCardClick: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val card = uiState.card
@@ -36,30 +38,15 @@ fun HomeScreen(
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = stringResource(R.string.scratch_card),
+            text = stringResource(R.string.home),
             style = MaterialTheme.typography.headlineMedium,
         )
 
         Spacer(Modifier.height(24.dp))
 
-        Text(
-            text = when (card.status) {
-                ScratchCardStatus.UNSCRATCHED -> stringResource(R.string.not_scratched)
-                ScratchCardStatus.SCRATCHED   -> stringResource(R.string.scratched)
-                ScratchCardStatus.ACTIVATED -> stringResource(R.string.activated)
-            },
-            style = MaterialTheme.typography.titleLarge,
-        )
+        ScratchCardView(card = card)
 
-        card.code?.let { code ->
-            Spacer(Modifier.height(8.dp))
-            Text(
-                text = stringResource(R.string.code) + ": " + code.toString().take(8),
-                style = MaterialTheme.typography.bodyMedium,
-            )
-        }
-
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(16.dp))
 
         Button(
             onClick = onScratchClick,
@@ -76,5 +63,17 @@ fun HomeScreen(
         ) {
             Text(stringResource(R.string.activate_card))
         }
+
+        Spacer(Modifier.height(32.dp))
+
+        // uncomment for testing
+//        Button(
+//            onClick = onResetCardClick,
+//            enabled = card.status != ScratchCardStatus.UNSCRATCHED ||
+//                card.code != null ||
+//                uiState.activationUiState != ActivationUiState.Idle,
+//        ) {
+//            Text(stringResource(R.string.reset_card))
+//        }
     }
 }
