@@ -2,10 +2,12 @@ package sk.figlar.scratchcard.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import sk.figlar.scratchcard.SIMULATED_OPERATION_DELAY
 import sk.figlar.scratchcard.data.activation.ActivationRepository
 import sk.figlar.scratchcard.data.activation.ActivationResult
 import sk.figlar.scratchcard.domain.ScratchCard
@@ -13,6 +15,7 @@ import sk.figlar.scratchcard.domain.ScratchCardEvent
 import sk.figlar.scratchcard.domain.ScratchCardReducer
 import sk.figlar.scratchcard.domain.ScratchCardStatus
 import java.util.UUID
+import kotlin.time.Duration.Companion.milliseconds
 
 class ScratchCardViewModel(
     private val activationRepository: ActivationRepository,
@@ -45,6 +48,8 @@ class ScratchCardViewModel(
         }
 
         viewModelScope.launch {
+            delay(SIMULATED_OPERATION_DELAY.milliseconds)
+
             when (activationRepository.activate(code)) {
                 ActivationResult.Success -> {
                     _uiState.update {
